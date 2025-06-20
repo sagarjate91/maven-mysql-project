@@ -46,7 +46,7 @@ public class App {
 
 	private static void delete() throws SQLException {
 		System.out.println("Start the deleting the data!");
-		Connection con = DatabaseConnection.con();
+		Connection con = new DatabaseConnection().con();
 		String sql = "DELETE FROM EMPLOYEE WHERE EMP_ID=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, 3);
