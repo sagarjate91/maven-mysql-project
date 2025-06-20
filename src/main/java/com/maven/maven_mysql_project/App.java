@@ -1,5 +1,7 @@
 package com.maven.maven_mysql_project;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,28 +9,48 @@ import java.sql.SQLException;
 
 public class App {
 	public static void main(String[] args) throws SQLException {
-		// insertion();
 
-		// read the data
-		// read();
+		try {
 
-		// update
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Enter the operation No: 1.Insertion 2.Read 3.Update 4.delete");
+			String operationName = br.readLine();
+			switch (operationName) {
+			case "Insertion":
+				insertion();
+				main(args);
+				break;
+			case "Read":
+				read();
+				main(args);
+				break;
+			case "Update":
+				update();
+				main(args);
+				break;
+			case "Delete":
+				delete();
+				main(args);
+				break;
+			default:
+				System.out.println("Your choice is wrong!");
+				main(args);
+				break;
+			}
 
-		//update();
-		
-		//delete 
-		
-		//delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
-	
+
 	private static void delete() throws SQLException {
 		System.out.println("Start the deleting the data!");
 		Connection con = DatabaseConnection.con();
-		String sql="DELETE FROM EMPLOYEE WHERE EMP_ID=?";
+		String sql = "DELETE FROM EMPLOYEE WHERE EMP_ID=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, 3);
-		
+
 		int count = ps.executeUpdate();
 
 		if (count > 0) {
